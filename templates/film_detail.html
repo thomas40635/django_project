@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    {{ object.titre }}
+{% endblock %}
+{% block main_content %}
+    <h1>{{ object.titre }}</h1>
+    <header class="main-infos-film">
+        <div class="image-container">
+            <img src="{{ object.image }}" alt="">
+        </div>
+        <p>
+            <span class="key">Réalisateur(s)</span>
+            <span class="value">
+                {% for realisateur in object.realisateurs.all %}
+                    {{ realisateur }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </span>
+            <span class="key">Acteur(s)</span>
+            <span class="value">
+                Thomas Paul, Sandrine Pizzimenti, Olivier Pons
+            </span>
+            <span class="key">Date de sortie</span>
+            <span class="value">
+                {{ object.dateSortie }}
+            </span>
+        </p>
+    </header>
+    <section class="secondary-infos-film">
+        <h1>Synopsis</h1>
+        <p>{{ object.synospis }}</p>
+    </section>
+{% endblock %}

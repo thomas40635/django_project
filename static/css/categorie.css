@@ -1,0 +1,27 @@
+.label-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin:-10px 30px 30px 30px;
+}
+
+button.label-button{
+    padding:10px 15px;
+    background: var(--background-color-darker);
+    font-family: "Google Sans", serif;
+    font-size: 18px;
+    color: var(--text-color);
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    transition: all 0.2s;
+}
+
+button.label-button.label-button-actived{
+    background: var(--primary-color);
+}
+
+button.label-button:hover{
+    background: var(--primary-color);
+    cursor: pointer;
+}

@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>WATCHIZ - {% block title %}{% endblock %}</title>
+    {% block css_content %}
+
+    {% endblock %}
+    {% block javascript_content %}
+
+    {% endblock %}
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/film.css' %}">
+    <link rel="stylesheet" href="{% static 'css/categorie.css' %}">
+</head>
+<body>
+<header>
+    <a href="{% url 'index_view' %}">
+        <div class="logo-container">
+            Watchiz
+        </div>
+    </a>
+    <nav>
+        <ul>
+            <a href="{% url 'film_list_by_letter' %}">
+                <li {% if 'by-letter' in request.path %}class="actived"{% endif %}>
+                    <span>Films par lettres</span>
+                    <div class="pointer"></div>
+                </li>
+            </a>
+            <a href="{% url 'film_list_by_categorie' %}">
+                <li {% if 'by-categorie' in request.path %}class="actived"{% endif %}>
+                    <span>Films par catégories</span>
+                    <div class="pointer"></div>
+                </li>
+            </a>
+            <a href="{% url 'profil_view' %}">
+                <li {% if 'profil' in request.path %}class="actived"{% endif %}>
+                    <span>Mon profil</span>
+                    <div class="pointer"></div>
+                </li>
+            </a>
+            <a href="{% url 'note_list' %}">
+                <li {% if 'notes' in request.path %}class="actived"{% endif %}>
+                    <span>Mes notes</span>
+                    <div class="pointer"></div>
+                </li>
+            </a>
+        </ul>
+    </nav>
+</header>
+<div class="left-content">
+    <nav>
+        <form id="searchform" action="{% url 'film_list_by_name' %}" method="GET" accept-charset="utf-8" class="main-search-form">
+            <input type="search" class="main-search" placeholder="Rechercher..." name="q">
+            <button type="submit"><img src="{% static 'img/icon/search.png' %}" alt=""></button>
+        </form>
+        <div class="log-infos">
+            {% if user.is_authenticated %}
+                <div></div>
+                <a href="{% url 'logout_view' %}">
+                    <button>Deconnexion</button>
+                </a>
+            {% else %}
+                <a href="{% url 'index_view' %}">
+                    <button>Inscription</button>
+                </a>
+                <a href="{% url 'login_view' %}">
+                    <button>Connexion</button>
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+    <main>
+        {% block main_content %}
+
+        {% endblock %}
+    </main>
+</div>
+<script src="{% static 'vendor/js/jquery-3.3.1.min.js' %}"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

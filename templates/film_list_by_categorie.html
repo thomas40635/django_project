@@ -1,0 +1,18 @@
+{% extends 'film_list.html' %}
+{% block title_content %}
+    <h1>Films par catégorie</h1>
+{% endblock %}
+{% block tri_content %}
+    <div class="label-container">
+        <a href="{% url 'film_list_by_categorie' %}">
+            <button class="label-button {% if categorie == None %}label-button-actived{% endif %} bigger">
+                Toutes
+            </button>
+        </a>
+        {% for item in categories %}
+            <a href="{% url 'film_list_by_categorie' item.slug %}">
+                <button class="label-button {% if categorie == item.slug %}label-button-actived{% endif %}">{{ item }}</button>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

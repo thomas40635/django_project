@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    Page d'accueil
+{% endblock %}
+{% block main_content %}
+    <h1>Connexion</h1>
+    <form method="post" role="form" action="/connexion/">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Utilisateur">
+        <input type="password" name="password" placeholder="Mot de passe">
+        <input type="submit" value="login"/>
+    </form>
+{% endblock %}

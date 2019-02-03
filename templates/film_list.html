@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    Liste des films
+{% endblock %}
+{% block main_content %}
+    {% block title_content %}
+        <h1>Liste des films</h1>
+    {% endblock %}
+    {% block tri_content %}
+
+    {% endblock %}
+    <div class="film-miniature-container">
+        {% for film in object_list %}
+            <a href="{% url 'film_detail' film.pk %}">
+                <div class="film-miniature">
+                    <div class="actions">
+                        <div class="user-actions">
+                            <div class="action-button">
+                                7.5
+                            </div>
+                        </div>
+                        <div class="admin-actions">
+                            <div class="action-button">
+                                <img src="{% static 'img/icon/edit.png' %}" alt="">
+                            </div>
+                            <div class="action-button">
+                                <img src="{% static 'img/icon/delete.png' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <div class="filter">
+                            <p>{{ film.synospis }}</p>
+                        </div>
+                        <img src="{{ film.image }}" alt="">
+                    </div>
+                    <div class="infos-container">
+                        <h1>{{ film.titre }}</h1>
+                        <span>
+                        {% for categorie in film.categories.all %}
+                            {{ categorie.label }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </span>
+                    </div>
+                </div>
+            </a>
+        {% empty %}
+            <div class="message message-normal">Aucun résultat</div>
+        {% endfor %}
+    </div>
+{% endblock %}

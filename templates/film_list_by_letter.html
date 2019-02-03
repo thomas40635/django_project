@@ -1,0 +1,20 @@
+{% extends 'film_list.html' %}
+{% block title_content %}
+    <h1>Films par lettre</h1>
+{% endblock %}
+{% block tri_content %}
+    <div class="letter-container">
+        <a href="{% url 'film_list_by_letter' %}">
+            <button class="letter-button {% if letter == None %}letter-button-actived{% endif %} bigger">
+                Toutes
+            </button>
+        </a>
+        {% for item in letters %}
+            <a href="{% url 'film_list_by_letter' item %}">
+                <button class="letter-button {% if letter == item %}letter-button-actived{% endif %}">
+                    {{ item }}
+                </button>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
